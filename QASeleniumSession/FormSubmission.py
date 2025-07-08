@@ -1,11 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
-option = Options()
-option.add_experimental_option("detach", True)
+options = Options()
+options.add_experimental_option("detach", True)
 
-driver = webdriver.Chrome(options=option)
+driver = webdriver.Chrome(options=options)
 
 driver.get("https://training.qaonlinetraining.com/testPage.php")
 name = driver.find_element(By.NAME, "name")
@@ -26,6 +27,18 @@ if radio_button.is_selected():
     print("True")
 else:
     print("False")
+
+driver.find_element(By.NAME, "bike").click()
+driver.find_element(By.NAME, "boat").click()
+driver.find_element(By.NAME, "horse").click()
+
+country = driver.find_element(By.NAME, "country")
+Select(country).select_by_visible_text("France")
+
+skill = driver.find_element(By.NAME, "skill")
+select_skill = Select(skill)
+Select(skill).select_by_value("qa")
+Select(skill).select_by_value("prg")
 
 send = driver.find_element(By.CLASS_NAME, "special")
 send.click()
